@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sure", "Sure\Sure.csproj", "{39340C55-4556-4B30-95FC-13A67FB3E3ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sean", "Sean\Sean.csproj", "{39340C55-4556-4B30-95FC-13A67FB3E3ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSure", "PowerSure\PowerSure.csproj", "{C265C0CC-6FF0-48FD-B294-AA225122F138}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSean", "PowerSean\PowerSean.csproj", "{C265C0CC-6FF0-48FD-B294-AA225122F138}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuDotNet", "..\awful\AuDotNet\AuDotNet.csproj", "{7D75BF00-DF81-4311-9FC9-48223D1B54BF}"
 EndProject
@@ -16,7 +16,7 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup", "Setup\Setup.isproj
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Releases", "Releases", "{E48D493D-298F-451A-9FB6-31C24E164A44}"
 	ProjectSection(SolutionItems) = preProject
-		Releases\SureShell_v1.1beta.exe = Releases\SureShell_v1.1beta.exe
+		Releases\SeanShell_v1.1beta.exe = Releases\SeanShell_v1.1beta.exe
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{0BF62680-BC14-4821-A0E8-8A42FB3D78AA}"
@@ -27,19 +27,19 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://vstfcodebox:8080/tfs/upsilon
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = Sure\\Sure.csproj
-		SccProjectTopLevelParentUniqueName1 = Sure.sln
-		SccProjectName1 = Sure
-		SccLocalPath1 = Sure
-		SccProjectUniqueName2 = PowerSure\\PowerSure.csproj
-		SccProjectTopLevelParentUniqueName2 = Sure.sln
-		SccProjectName2 = PowerSure
-		SccLocalPath2 = PowerSure
+		SccProjectUniqueName1 = Sean\\Sean.csproj
+		SccProjectTopLevelParentUniqueName1 = Sean.sln
+		SccProjectName1 = Sean
+		SccLocalPath1 = Sean
+		SccProjectUniqueName2 = PowerSean\\PowerSean.csproj
+		SccProjectTopLevelParentUniqueName2 = Sean.sln
+		SccProjectName2 = PowerSean
+		SccLocalPath2 = PowerSean
 		SccProjectUniqueName3 = Setup\\Setup.isproj
 		SccProjectName3 = Setup
 		SccLocalPath3 = Setup
 		SccProjectUniqueName4 = ..\\awful\\AuDotNet\\AuDotNet.csproj
-		SccProjectTopLevelParentUniqueName4 = Sure.sln
+		SccProjectTopLevelParentUniqueName4 = Sean.sln
 		SccProjectName4 = ../awful/AuDotNet
 		SccLocalPath4 = ..\\awful\\AuDotNet
 	EndGlobalSection
