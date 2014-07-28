@@ -1,0 +1,18 @@
+﻿#1 ARGH:
+      $outlook = new-object -comobject "Outlook.Application"
+	  $outlook
+	says 
+	  "A COM object was accessed after it was already released: COM object that has been separated from its underlying RCW cannot be used."
+
+	Fixed by making Runspace MTA
+
+#2 neaten up tab completions with long filenames
+      Fixed 1/7/11
+
+#3 fix d[TAB], which has wacky chars
+	  No longer observed
+
+#4 completion at space at eol
+
+
+  
