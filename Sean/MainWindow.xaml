@@ -38,7 +38,7 @@
     <Grid x:Name="grid" PreviewKeyDown="Grid_PreviewKeyDown" TextInput="Grid_TextInput">
         <Grid.RowDefinitions>
             <!-- Debug window -->
-            <!-- <RowDefinition Height="{couldn't make this work: Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/> -->
+            <!-- <RowDefinition Height="{couldn't make this work: Binding Source={x:Static Sure.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/> -->
             <RowDefinition Height="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/>
             <!-- Splitter -->
             <RowDefinition Height="Auto"/>
@@ -55,7 +55,7 @@
                 <FlowDocument FontFamily="Consolas" FontSize="10" Background="#e0ffe0" TextAlignment="Left" ColumnGap="0" PagePadding="4,2,2,2" PageWidth="Auto" Name="debug" Focusable="False">
                     <Paragraph Margin="0" BreakPageBefore="False">
                         Welcome to
-                        <Bold>Sean!</Bold>
+                        <Bold>Sure!</Bold>
                         Use
                         <Bold>sure-write-debug</Bold> to write in this debug area.
                         <LineBreak/>
