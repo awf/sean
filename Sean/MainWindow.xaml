@@ -1,11 +1,11 @@
-﻿<Window x:Class="Sure.MainWindow"
+﻿<Window x:Class="Sean.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:Sure.Properties="clr-namespace:Sure.Properties"
-        Title="Sure"
+        xmlns:Sean.Properties="clr-namespace:Sean.Properties"
+        Title="Sean"
         
-        Width="{Binding Source={x:Static Sure.Properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
-        Height="{Binding Source={x:Static Sure.Properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
+        Width="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
+        Height="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
         Background="Gray" SizeToContent="Manual"
         Name="mainwin" Loaded="mainwin_Loaded" Closed="mainwin_Closed">
 
@@ -13,8 +13,8 @@
         <SolidColorBrush x:Key="inputbox_fg" Color="White" />
         <SolidColorBrush x:Key="inputbox_bg" Color="#ff303030" />
         <SolidColorBrush x:Key="visualbell_bg" Color="Red" />
-        <SolidColorBrush x:Key="console_fg" Color="{Binding Source={x:Static Sure.Properties:Settings.Default}, Path=Foreground, Mode=TwoWay}" />
-        <SolidColorBrush x:Key="console_bg" Color="{Binding Source={x:Static Sure.Properties:Settings.Default}, Path=Background, Mode=TwoWay}" />
+        <SolidColorBrush x:Key="console_fg" Color="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Foreground, Mode=TwoWay}" />
+        <SolidColorBrush x:Key="console_bg" Color="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Background, Mode=TwoWay}" />
 
         <!-- Storyboard for visualbell animation -->
         <Storyboard x:Key="visualbell_storyboard" x:Name="visualbell_storyboard" Duration="0:0:0.3" TargetName="input">
@@ -38,8 +38,8 @@
     <Grid x:Name="grid" PreviewKeyDown="Grid_PreviewKeyDown" TextInput="Grid_TextInput">
         <Grid.RowDefinitions>
             <!-- Debug window -->
-            <!-- <RowDefinition Height="{couldn't make this work: Binding Source={x:Static Sure.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/> -->
-            <RowDefinition Height="{Binding Source={x:Static Sure.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/>
+            <!-- <RowDefinition Height="{couldn't make this work: Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/> -->
+            <RowDefinition Height="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/>
             <!-- Splitter -->
             <RowDefinition Height="Auto"/>
             <!-- Main console window -->
@@ -55,7 +55,7 @@
                 <FlowDocument FontFamily="Consolas" FontSize="10" Background="#e0ffe0" TextAlignment="Left" ColumnGap="0" PagePadding="4,2,2,2" PageWidth="Auto" Name="debug" Focusable="False">
                     <Paragraph Margin="0" BreakPageBefore="False">
                         Welcome to
-                        <Bold>Sure!</Bold>
+                        <Bold>Sean!</Bold>
                         Use
                         <Bold>sure-write-debug</Bold> to write in this debug area.
                         <LineBreak/>

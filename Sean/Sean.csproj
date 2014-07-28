@@ -8,8 +8,8 @@
     <ProjectGuid>{39340C55-4556-4B30-95FC-13A67FB3E3ED}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sure</RootNamespace>
-    <AssemblyName>Sure</AssemblyName>
+    <RootNamespace>Sean</RootNamespace>
+    <AssemblyName>Sean</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -44,7 +44,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Sure.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -194,6 +195,7 @@
     <Compile Include="MyPSHost.cs" />
     <Compile Include="MyPSHostRawUserInterface.cs" />
     <Compile Include="MyPSHostUserInterface.cs" />
+    <Compile Include="PartialParser.cs" />
     <Compile Include="PowerShellHelper.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="SureCommandBinding.cs" />
@@ -256,29 +258,20 @@
     <Content Include="Scripts\sure-out-default.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Sure.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\awful\AuDotNet\AuDotNet.csproj">
-      <Project>{7D75BF00-DF81-4311-9FC9-48223D1B54BF}</Project>
-      <Name>AuDotNet</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PowerSure\PowerSure.csproj">
-      <Project>{C265C0CC-6FF0-48FD-B294-AA225122F138}</Project>
-      <Name>PowerSure</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Documents\Sure.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\TODO.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\codebox\awfutils\AuDotNet\AuDotNet.csproj">
+      <Project>{7d75bf00-df81-4311-9fc9-48223d1b54bf}</Project>
+      <Name>AuDotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>@rem copy $(ProjectDir)Scripts\sure*.ps1 $(TargetDir)</PostBuildEvent>
+    <PostBuildEvent>@rem copy $(ProjectDir)Scripts\sean*.ps1 $(TargetDir)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

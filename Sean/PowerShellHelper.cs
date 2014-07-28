@@ -12,7 +12,7 @@ using System.Reflection;
 using System.IO;
 using Microsoft.Research.AuDotNet;
 
-namespace Sure
+namespace Sean
 {
     public enum PSHelperState
     {
@@ -139,7 +139,7 @@ namespace Sure
 
                 if (load_user_profile)
                 {
-                    PSCommand[] profileCommands = PSUtils.GetProfileCommands("Sure", false);
+                    PSCommand[] profileCommands = PSUtils.GetProfileCommands("Sean", false);
                     foreach (PSCommand command in profileCommands)
                     {
                         MainWindow.StaticDebugWrite("Profile command: " + PSUtils.Print(command) + "\n");
@@ -157,12 +157,12 @@ namespace Sure
                     }
                 }
 
-                // Add exe directory to end of path to pick up sure-get-completions etc
+                // Add exe directory to end of path to pick up sean-get-completions etc
                 string exe_dir = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
                 {
-                    string sure_scripts_dir = exe_dir + "Scripts";
+                    string sean_scripts_dir = exe_dir + "Scripts";
                     CurrentPowerShell.Commands.Clear();
-                    CurrentPowerShell.Commands.AddScript("$Env:PATH += ';" + sure_scripts_dir + "'");
+                    CurrentPowerShell.Commands.AddScript("$Env:PATH += ';" + sean_scripts_dir + "'");
                     CurrentPowerShell.Invoke();
                 }
 
@@ -174,20 +174,20 @@ namespace Sure
                 // precedence over a user's customized ones
                 //
                 // FIXME: Horrible hack to find if we're debugginh is that we strip elements 
-                // from exe_dir until we run out, or find one containing "Sure.csproj"
+                // from exe_dir until we run out, or find one containing "Sean.csproj"
                 string dir = exe_dir;
                 while (!String.IsNullOrEmpty(dir))
                 {
-                    string sureproj = Path.Combine(dir, "Sure", "Sure.csproj");
-                    if (File.Exists(sureproj))
+                    string seanproj = Path.Combine(dir, "Sean", "Sean.csproj");
+                    if (File.Exists(seanproj))
                     {
-                        string sure_scripts_dir = Path.Combine(dir, "Sure", "Scripts");
+                        string sean_scripts_dir = Path.Combine(dir, "Sean", "Scripts");
 
-                        MainWindow.StaticDebugWrite("Found sure project [" + sureproj + "], Adding [" + sure_scripts_dir + "] to path\n");
+                        MainWindow.StaticDebugWrite("Found sean project [" + seanproj + "], Adding [" + sean_scripts_dir + "] to path\n");
 
                         CurrentPowerShell.Commands.Clear();
                         CurrentPowerShell.Commands.AddScript(
-                            "$Env:PATH = '" + sure_scripts_dir + ";' + $Env:PATH;" +
+                            "$Env:PATH = '" + sean_scripts_dir + ";' + $Env:PATH;" +
                             "write-host 'AppBase=[" + exe_dir + "]'");
                         CurrentPowerShell.Invoke();
 

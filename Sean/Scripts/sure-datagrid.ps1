@@ -4,7 +4,7 @@ Send an object array to the console as a WPF DataGrid
 
 .DESCRIPTION
 
- $g = sure-datagrid.ps1 Name,Length (dir) 
+ $g = sean-datagrid.ps1 Name,Length (dir) 
 Returns the DataGrid object in $g
 
 .PARAMETER fields
@@ -31,4 +31,4 @@ $xaml += @'
 </DataGrid>
 '@
 
-sure-insert-xaml $xaml $array
+sean-insert-xaml $xaml $array

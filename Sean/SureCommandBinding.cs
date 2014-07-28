@@ -9,10 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sure
+namespace Sean
 {
     [AttributeUsage(AttributeTargets.All)]
-    public class SureCommandBindingAttribute : Attribute
+    public class SeanCommandBindingAttribute : Attribute
     {
         string commandname;
         string defaultkey;
@@ -22,7 +22,7 @@ namespace Sure
         Exec exec;
         Control target;
 
-        public SureCommandBindingAttribute(string commandname, string defaultkey, ControlBinding target_mask)
+        public SeanCommandBindingAttribute(string commandname, string defaultkey, ControlBinding target_mask)
         {
             this.commandname = commandname;
             this.defaultkey = defaultkey;
@@ -56,8 +56,8 @@ namespace Sure
             foreach (MethodInfo method in instance.GetType().GetMethods())
             {
                 //System.Diagnostics.Debug.WriteLine(method.ToString());
-                foreach (SureCommandBindingAttribute a in
-                         method.GetCustomAttributes(typeof(SureCommandBindingAttribute), true))
+                foreach (SeanCommandBindingAttribute a in
+                         method.GetCustomAttributes(typeof(SeanCommandBindingAttribute), true))
                  if ((a.target_mask & target_mask) > 0) {
                     a.exec = (Exec)Delegate.CreateDelegate(typeof(Exec), instance, method);
                     a.target = target;

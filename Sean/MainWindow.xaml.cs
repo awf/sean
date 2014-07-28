@@ -19,9 +19,9 @@ using System.Management.Automation;
 using Au = Microsoft.Research.AuDotNet;
 using System.Windows.Media.Animation;
 using System.ComponentModel;
-using Sure.Properties;
+using Sean.Properties;
 
-namespace Sure
+namespace Sean
 {
     /// <summary>
     /// These are the flags to indicate which control each command is bound to.
@@ -53,7 +53,7 @@ namespace Sure
             ctrlmap.Add(inputbox, ControlBinding.inputbox);
             ctrlmap.Add(scroller, ControlBinding.scroller);
             ctrlmap.Add(this,     ControlBinding.window);
-            SureCommandBindingAttribute.AddBindingsToControls(this, typeof(MainWindow), ctrlmap);
+            SeanCommandBindingAttribute.AddBindingsToControls(this, typeof(MainWindow), ctrlmap);
         }
 
         private void mainwin_Loaded(object sender, RoutedEventArgs e)
@@ -157,7 +157,7 @@ namespace Sure
             ScrollToEnd();
         }
 
-        [SureCommandBinding("Window_Tab", "Tab", ControlBinding.window)]
+        [SeanCommandBinding("Window_Tab", "Tab", ControlBinding.window)]
         public void WindowTab()
         {
             inputbox.Focus();
@@ -166,7 +166,7 @@ namespace Sure
         #endregion
 
         #region Command-line Enter
-        [SureCommandBinding("CLI_Enter", "Return", ControlBinding.inputbox)]
+        [SeanCommandBinding("CLI_Enter", "Return", ControlBinding.inputbox)]
         public void Enter()
         {
             if  (PshIsBusy)
@@ -216,7 +216,7 @@ namespace Sure
         #endregion
 
         #region Control-C handling
-        [SureCommandBinding("CLI_CtrlC", "CTRL+C", ControlBinding.inputbox)]
+        [SeanCommandBinding("CLI_CtrlC", "CTRL+C", ControlBinding.inputbox)]
         public void CtrlC()
         {
             if (inputbox.SelectionLength == 0)
@@ -287,13 +287,13 @@ namespace Sure
             history.Add(s);
         }
 
-        [SureCommandBinding("ForwardHistory", "Down", ControlBinding.inputbox)]
+        [SeanCommandBinding("ForwardHistory", "Down", ControlBinding.inputbox)]
         public void ForwardHistory()
         {
             HistoryNavigate(true);
         }
 
-        [SureCommandBinding("BackHistory", "Up", ControlBinding.inputbox)]
+        [SeanCommandBinding("BackHistory", "Up", ControlBinding.inputbox)]
         public void BackHistory()
         {
             HistoryNavigate(false);
@@ -301,7 +301,7 @@ namespace Sure
         #endregion History
 
         #region Tab Completion
-        [SureCommandBinding("CLI_Tab", "Tab", ControlBinding.inputbox)]
+        [SeanCommandBinding("CLI_Tab", "Tab", ControlBinding.inputbox)]
         public void InputboxTab()
         {
             if (PshIsBusy)
@@ -559,7 +559,7 @@ namespace Sure
         }
 
         #region GenerateLines (Test routine)
-        [SureCommandBinding("GenerateLines", "CTRL+ALT+G", ControlBinding.inputbox)]
+        [SeanCommandBinding("GenerateLines", "CTRL+ALT+G", ControlBinding.inputbox)]
         public void GenerateLines()
         {
             DebugWrite("\nGenerate ");

@@ -1,8 +1,8 @@
 param($act)
-# A collection of routines to interact with Sure
+# A collection of routines to interact with Sean
 # Examples:
-#    sure do "Message"   # adds message to TODO.txt
-#    sure copy           # copy installation to ~/bin
+#    sean do "Message"   # adds message to TODO.txt
+#    sean copy           # copy installation to ~/bin
 
 function go($cmd)
 {
@@ -10,12 +10,12 @@ function go($cmd)
   & $cmd
 }
 
-$suredir = "c:\dev\SureShell\Sure"
-$todo = "$suredir/Documents/TODO.txt"
+$seandir = "c:\dev\SeanShell\Sean"
+$todo = "$seandir/Documents/TODO.txt"
 
 switch ($act) {
   "newbug" {
-	throw "use sure-report-bug to report bugs"
+	throw "use sean-report-bug to report bugs"
   }
   "do" {
     $msg = "$args"
@@ -26,6 +26,6 @@ switch ($act) {
     cat $todo | select -last 10
   }
   "copy" {
-    go { copy Sure.exe,AuDotNet.dll,PowerSure.dll,"$suredir/Scripts/*.ps1" ~/bin }
+    go { copy Sean.exe,AuDotNet.dll,PowerSean.dll,"$seandir/Scripts/*.ps1" ~/bin }
   }
 }

@@ -1,5 +1,5 @@
 param($tokens)
-# Take a list of tokens from PowerSure.Parse, and reassemble into a string
+# Take a list of tokens from PowerSean.Parse, and reassemble into a string
 
 if ($tokens -eq 'test') {
   # test
@@ -7,8 +7,8 @@ if ($tokens -eq 'test') {
     if (!$expected) {
       $expected = $expr;
     }
-    $t = [PowerSure.Parser]::Parse($expr)
-    $back = sure-parse-to-expr $t
+    $t = [PowerSean.Parser]::Parse($expr)
+    $back = sean-parse-to-expr $t
     awf-test-assert "$back" $expected
   }
   write-host "Testing"
@@ -37,7 +37,7 @@ $tokens | % {
     }
     Group {
       $kids = $token.Children
-      "(" + (sure-parse-to-expr $kids) + ")"
+      "(" + (sean-parse-to-expr $kids) + ")"
     }
     default {
       $c

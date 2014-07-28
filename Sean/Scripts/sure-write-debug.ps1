@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Write debug messages to Sure's debug window
+Write debug messages to Sean's debug window
 
 .DESCRIPTION
 Write them.
@@ -41,13 +41,13 @@ $hosttype = $Host.PrivateData.GetType().ToString();
 if ($hosttype -eq "wpfhost.MyHost") {
   $wpfhost = $Host.PrivateData -as [wpfhost.MyHost];
 }
-if ($hosttype -eq "Sure.MyPSHost") {
-  $wpfhost = $Host.PrivateData.UI -as [Sure.MyPSHostUserInterface]
+if ($hosttype -eq "Sean.MyPSHost") {
+  $wpfhost = $Host.PrivateData.UI -as [Sean.MyPSHostUserInterface]
 }
 if ($wpfhost) {
   if (!$c) { $msg += "`n"; }
-  if (!$dont) { $wpfhost.SureWriteToDebugWindow($msg); }
+  if (!$dont) { $wpfhost.SeanWriteToDebugWindow($msg); }
   return
 }
 
-throw "Not in a SureShell"
+throw "Not in a SeanShell"

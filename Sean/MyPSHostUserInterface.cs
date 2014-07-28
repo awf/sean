@@ -42,7 +42,7 @@ using System.Threading;
 ///   WriteVerboseLine(string message);
 ///   WriteWarningLine(string message);
 
-namespace Sure
+namespace Sean
 {
 
     internal class MyPSUICore
@@ -141,22 +141,22 @@ namespace Sure
             readlineWait.Set();
         }
 
-        #region Sure Additions
+        #region Sean Additions
         /// <summary>
         /// Write to the WPF debug window.
-        /// This method is provided to allow scripts access to the Sure debug window (above the console)
+        /// This method is provided to allow scripts access to the Sean debug window (above the console)
         /// </summary>
         /// <param name="s"></param>
-        public void SureWriteToDebugWindow(string s)
+        public void SeanWriteToDebugWindow(string s)
         {
             mainwin.Dispatcher.BeginInvoke(new Action(() => mainwin.DebugWrite(s)), DispatcherPriority.Normal);
         }
 
         /// <summary>
-        /// SureInsertXaml
+        /// SeanInsertXaml
         /// </summary>
         /// <param name="s"></param>
-        public UIElement SureInsertXaml(string s, object data_context)
+        public UIElement SeanInsertXaml(string s, object data_context)
         {
             uie = null;
             mainwin.Dispatcher.Invoke(new Action(() =>
@@ -166,7 +166,7 @@ namespace Sure
                 {
                     FrameworkElement fe = uie as FrameworkElement;
                     if (fe == null)
-                        SureWriteToDebugWindow("Attempt to attach datacontext to a non-FrameworkElement");
+                        SeanWriteToDebugWindow("Attempt to attach datacontext to a non-FrameworkElement");
                     else
                         fe.DataContext = data_context;
                 }
@@ -176,10 +176,10 @@ namespace Sure
         UIElement uie = null;
 
         /// <summary>
-        /// SureInsertFrozenUIElement
+        /// SeanInsertFrozenUIElement
         /// </summary>
         /// <param name="s"></param>
-        public void SureInsertFrozenUIElement(UIElement uie)
+        public void SeanInsertFrozenUIElement(UIElement uie)
         {
             mainwin.Dispatcher.BeginInvoke(new Action(() => mainwin.InsertUIElement(uie)), DispatcherPriority.Normal);
         }
@@ -245,27 +245,27 @@ namespace Sure
 
         /// <summary>
         /// Write to the WPF debug window.
-        /// This method is provided to allow scripts access to the Sure debug window (above the console)
+        /// This method is provided to allow scripts access to the Sean debug window (above the console)
         /// </summary>
         /// <param name="s"></param>
-        public void SureWriteToDebugWindow(string s)
+        public void SeanWriteToDebugWindow(string s)
         {
-            coreui.SureWriteToDebugWindow(s);
+            coreui.SeanWriteToDebugWindow(s);
         }
 
-        public UIElement SureInsertXaml(string s)
+        public UIElement SeanInsertXaml(string s)
         {
-            return coreui.SureInsertXaml(s, null);
+            return coreui.SeanInsertXaml(s, null);
         }
 
-        public UIElement SureInsertXaml(string s, object DataContext)
+        public UIElement SeanInsertXaml(string s, object DataContext)
         {
-            return coreui.SureInsertXaml(s, DataContext);
+            return coreui.SeanInsertXaml(s, DataContext);
         }
 
-        public void SureInsertFrozenUIElement(UIElement uie)
+        public void SeanInsertFrozenUIElement(UIElement uie)
         {
-            coreui.SureInsertFrozenUIElement(uie);
+            coreui.SeanInsertFrozenUIElement(uie);
         }
 
         public override void Write(ConsoleColor foregroundColor, ConsoleColor backgroundColor, string value)

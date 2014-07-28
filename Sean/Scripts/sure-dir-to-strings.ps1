@@ -1,5 +1,5 @@
 #
-#  sure-dir-to-strings 
+#  sean-dir-to-strings 
 #  
 #  Expand glob $pattern and return as an array of strings,
 #  replacing home dir with ~, current dir with ., etc.
@@ -30,19 +30,19 @@ else
 $initial_fullname = $initial_fullname -replace '\\+$',''
 
 if ($verbose) {
-  sure-write-debug "dir-to-strings [$pattern] init [$initial|$initial_fullname]"
+  sean-write-debug "dir-to-strings [$pattern] init [$initial|$initial_fullname]"
 }
 
-if (!$global:sure_translations_src -or $sure_reset) {
-  sure-write-debug "dir-to-strings: Getting translations"
-  $global:sure_translations_src = @()
-  $global:sure_translations_dst = @()
+if (!$global:sean_translations_src -or $sean_reset) {
+  sean-write-debug "dir-to-strings: Getting translations"
+  $global:sean_translations_src = @()
+  $global:sean_translations_dst = @()
   get-psprovider | % { $_.Drives } | % {
     $src = $_.provider.ToString() + "::" + ($_.root -replace '\\$','');
     $dst = $_.name;
-    $global:sure_translations_src += @($src);
-    $global:sure_translations_dst += @($dst)
-    sure-write-debug "dir-to-strings:   [$src] -->  [$dst]"
+    $global:sean_translations_src += @($src);
+    $global:sean_translations_dst += @($dst)
+    sean-write-debug "dir-to-strings:   [$src] -->  [$dst]"
   }
 }
 
@@ -57,10 +57,10 @@ dir -force $pattern | % {
     # special-case filesystem for speed.. much faster for me on 1/xi/2010..
     $fn = $matches[1]
   } else {
-    for($i = 0; $i -lt $global:sure_translations_src.count; ++$i) {
-      if ($fn.StartsWith($global:sure_translations_src[$i])) {
-        $fn = $global:sure_translations_dst[$i] + ":" +
-           $fn.Substring($global:sure_translations_src[$i].length);
+    for($i = 0; $i -lt $global:sean_translations_src.count; ++$i) {
+      if ($fn.StartsWith($global:sean_translations_src[$i])) {
+        $fn = $global:sean_translations_dst[$i] + ":" +
+           $fn.Substring($global:sean_translations_src[$i].length);
         break
       }
     }

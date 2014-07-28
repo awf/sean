@@ -5,14 +5,14 @@ if ($PSVersionTable.PSVersion.Major -lt 3) {
 }
 
 if ($verbose) {
-  sure-write-debug "***"
-  sure-write-debug "sure-get-completions3: line [$line]"
+  sean-write-debug "***"
+  sean-write-debug "sean-get-completions3: line [$line]"
 }
 
 if ($line.EndsWith("``")) {
   $line = $line.Substring(0, $line.length-1)
   if ($verbose) {
-    sure-write-debug "sure-get-completions3: stripped backtick [$line]"
+    sean-write-debug "sean-get-completions3: stripped backtick [$line]"
   }
 }
 #	write-host ("1Elapsed {0:#.##} msec" -f (((get-date) - $t0).TotalSeconds * 1000))
@@ -20,10 +20,10 @@ if ($line.EndsWith("``")) {
 # PS V3 won't complete a bare command with backticks
 $wasbarecommand = $tokens.count -eq 1 -and $tokens[0].type -eq 'Command' -and $line -notmatch '^ *&'  -and $line -match '`'
 if ($wasbarecommand) {
-	if ($verbose) { sure-write-debug "Translating bare command for PSV3 bug from [$line]" }
+	if ($verbose) { sean-write-debug "Translating bare command for PSV3 bug from [$line]" }
 	$line = $line -replace '`(.)','$1' -replace "'","''"
 	$line = "& '$line'"
-	if ($verbose) { sure-write-debug "Translating bare command for PSV3 bug to [$line]" }
+	if ($verbose) { sean-write-debug "Translating bare command for PSV3 bug to [$line]" }
 }
 
 #	write-host ("2Elapsed {0:#.##} msec" -f (((get-date) - $t0).TotalSeconds * 1000))
@@ -41,12 +41,12 @@ $expansions = [System.Management.Automation.CommandCompletion]::CompleteInput(
 write-progress "Tab Completion" -perc 80
 #	write-host ("3Elapsed {0:#.##} msec" -f (((get-date) - $t0).TotalSeconds * 1000))
 
-$global:sure_expansions = $expansions
+$global:sean_expansions = $expansions
 
 $n = $expansions.CompletionMatches.count
 
 if ($verbose) {
-  sure-write-debug "Got $n expansions"
+  sean-write-debug "Got $n expansions"
 }
 
 if (!$n) {
@@ -56,9 +56,9 @@ if (!$n) {
   return
 
   # xxfixme: calling v2, need to trip backticks from last token if present
-  sure-write-debug "Calling sure-get-completions-2"
+  sean-write-debug "Calling sean-get-completions-2"
   $tokens[-1].Content = $tokens[-1].Content -replace "``$",''
-  return sure-get-completions-2 $line $tokens $verbose
+  return sean-get-completions-2 $line $tokens $verbose
 }
 
 $names = $expansions | % { $start = -1 } {
@@ -66,9 +66,9 @@ $names = $expansions | % { $start = -1 } {
     $start = $_.ReplacementIndex
   } else {
     if ($_.ReplacementIndex -ne $start) {
-      sure-write-debug "EEEK: Resetting start"
+      sean-write-debug "EEEK: Resetting start"
       $start = [math]::min($_.ReplacementIndex, $start)
-      sure-write-debug "EEEK: Resetting start -> $start"
+      sean-write-debug "EEEK: Resetting start -> $start"
     }
   }
 
@@ -83,7 +83,7 @@ $names = $expansions | % { $start = -1 } {
 	$quoth_matches = $_.CompletionMatches | % { 
 	    $text = $_.CompletionText;
 		$quoth = if (!($text.StartsWith("'") -or $text.StartsWith('"'))) {
-			sure-write-debug "EEK: not quoted [$text]"
+			sean-write-debug "EEK: not quoted [$text]"
 			"'$text'"
 		} else {
 			$text
@@ -109,7 +109,7 @@ $names = $expansions | % { $start = -1 } {
           $text
         }
 		if ($quoth -match "``") {
-			sure-write-debug "WARNING: replacement contains  backtick -- is it quoting anything?"
+			sean-write-debug "WARNING: replacement contains  backtick -- is it quoting anything?"
 		}
 		$quoth -replace "('')","``'" -replace '([^''A-Za-z_0-9\\/.:${}`-])','`$1'
     }
@@ -123,7 +123,7 @@ if ($start -ge 0) {
   }
   $restofline = $line.Substring(0, $start);
 } else {
-  sure-write-debug "start =0"
+  sean-write-debug "start =0"
   $restofline = ''
 }
 @($restofline) + @($names)
@@ -148,8 +148,8 @@ exit
 #############
 
 if (!$tokens) { 
-  sure-write-debug "NOTE: Parsing line, normally I expect the caller to do this"
-  $tokens = [PowerSure.Parser]::Parse($line)
+  sean-write-debug "NOTE: Parsing line, normally I expect the caller to do this"
+  $tokens = [PowerSean.Parser]::Parse($line)
 
   ## V3 Parser	
   #$toks = [System.Management.Automation.Language.Token[]]@()
@@ -165,10 +165,10 @@ function toc
 }
 
 # record them for debug
-$global:suretokens = $tokens
+$global:seantokens = $tokens
 $n = $tokens.count
 if ($verbose) {
-  sure-write-debug "sure-get-completions: PARSE got $n tokens: $(sure-parse-print $tokens)"
+  sean-write-debug "sean-get-completions: PARSE got $n tokens: $(sean-parse-print $tokens)"
 }
 
 # Check if last token ends before the end of the line,
@@ -180,8 +180,8 @@ if ($n -gt 0) {
    $lastcol = $tokens[$n-1].Start + $tokens[$n-1].Length
 }
 if ($lastcol -lt $line.Length -and $line.EndsWith(' ')) {
-   sure-write-debug "sure-get-completions: OFF THE END lastcol=$lastcol LL = $($line.Length)"
-   $lasttok = new-object PowerSure.Token
+   sean-write-debug "sean-get-completions: OFF THE END lastcol=$lastcol LL = $($line.Length)"
+   $lasttok = new-object PowerSean.Token
    $lasttok.Type = 'CommandArgument'
    $lasttok.Content = ''
    $lasttok.Start = $line.Length
@@ -194,10 +194,10 @@ if ($lastcol -lt $line.Length -and $line.EndsWith(' ')) {
 ## If $n = 0 and line is empty, make a Command with content ""
 if ($n -le 0) {
   if ($line -ne '') {
-    sure-write-debug "sure-get-completions: NO TOKENS, NONEMPTY LINE [$line]"
+    sean-write-debug "sean-get-completions: NO TOKENS, NONEMPTY LINE [$line]"
     return
   }
-  $lasttok = new-object PowerSure.Token
+  $lasttok = new-object PowerSean.Token
   $lasttok.Type = 'Command'
   $lasttok.Content = ''
   $lasttok.Start = 0
@@ -207,7 +207,7 @@ if ($n -le 0) {
 }
 
 if ($verbose) {
-  sure-write-debug "sure-get-completions: mutated to $n tokens: $(sure-parse-print $tokens)"
+  sean-write-debug "sean-get-completions: mutated to $n tokens: $(sean-parse-print $tokens)"
 }
 
 ## Set up lasttype, lastword etc
@@ -225,22 +225,22 @@ if (($lasttype -eq 'CommandArgument') -or
     ($lasttype -eq 'Command' -and $lastword -match '[/\\]') -or
     ($lasttype -eq 'String')   ) {
   if ($verbose) {
-    sure-write-debug "sure-get-completions: Filename expansion, lastword [$lastword]"
+    sean-write-debug "sean-get-completions: Filename expansion, lastword [$lastword]"
   }
 
-  $file_names = @(sure-dir-to-strings "${lastword}*")
+  $file_names = @(sean-dir-to-strings "${lastword}*")
   # If it was a string, return it as a double-quoted string
   if ($lasttype -eq 'String') {
      $file_names = $file_names | % { '"' + ($_ -replace '`([^"])','$1') }
-	 #sure-write-debug "Back to string [$($file_names[0])]"
+	 #sean-write-debug "Back to string [$($file_names[0])]"
   }
 
   $names += @($file_names)
   if ($verbose) {
-    sure-write-debug "sure-get-completions: Got $($file_names.count) files; first 4: |$($file_names[0..4] -join '|')|"
-    sure-write-debug "files[$($file_names.count)]"
+    sean-write-debug "sean-get-completions: Got $($file_names.count) files; first 4: |$($file_names[0..4] -join '|')|"
+    sean-write-debug "files[$($file_names.count)]"
   }
-  #sure-write-debug ("dirtime = " + (toc))
+  #sean-write-debug ("dirtime = " + (toc))
 }
 
 # 1b. Command expansion
@@ -248,18 +248,18 @@ if (($lasttype -eq 'Command' -or
     ($lasttype -eq 'String' -and $n -eq 1)) -and
    !($lastword -match '[/\\]') ) {
   if ($verbose) {
-    sure-write-debug "sure-get-completions: Command expansion, lastword [$lastword]"
+    sean-write-debug "sean-get-completions: Command expansion, lastword [$lastword]"
   }
   $command_names = @(get-command -name "${lastword}*" | % { if (!($_.name -match '\.dll$')) {  $_.name } })
   $names += $command_names
-  ##sure-write-debug "commands[$($command_names.count)]: $command_names"
-  # sure-write-debug "cmds[$($names.count)]: ¦$($names[0..4] -join '¦')¦"
+  ##sean-write-debug "commands[$($command_names.count)]: $command_names"
+  # sean-write-debug "cmds[$($names.count)]: ¦$($names[0..4] -join '¦')¦"
 }
 
 # 1c. Get variables 
 if ($lasttype -eq 'Variable') {
   if ($verbose) {
-    sure-write-debug "sure-get-completions: Variable expansion, lastword [$lastword]"
+    sean-write-debug "sean-get-completions: Variable expansion, lastword [$lastword]"
   }
   
   $var = $lastword;
@@ -277,8 +277,8 @@ if ($lasttype -eq 'Variable') {
     $names += @(get-childitem "$lastword*" | % { '$function:' + $_.name })
   }
   if ($verbose) {
-    sure-write-debug "variables: count=$($names.count) names=[$names]"
-    sure-write-debug "vars[$($names.count)]: ¦$($names -join '¦')¦"
+    sean-write-debug "variables: count=$($names.count) names=[$names]"
+    sean-write-debug "vars[$($names.count)]: ¦$($names -join '¦')¦"
   }
 }
 
@@ -289,7 +289,7 @@ if ($lasttype -eq 'Member' -and ($n -gt 2)) {
   $optok = $tokens[($n-2)]
   if ($exprtok.Type -eq 'Type') {
     $t = $exprtok.Content
-    sure-write-debug "Type EXPR [$t]"
+    sean-write-debug "Type EXPR [$t]"
     $type = invoke-expression "[$t]"
     $mems = $type.GetMembers() | select -expand Name | sort | get-unique
     $restofline = $line.Substring(0, $tokens[$n-3].Start);
@@ -297,21 +297,21 @@ if ($lasttype -eq 'Member' -and ($n -gt 2)) {
     
   } else {
     # Evaluate it...
-    $expr = [string](sure-parse-to-expr $exprtok);
-    $sep = [string](sure-parse-to-expr $optok);
+    $expr = [string](sean-parse-to-expr $exprtok);
+    $sep = [string](sean-parse-to-expr $optok);
     $var = $lastword;
     $restofline = $line.Substring(0, $tokens[$n-3].Start);
     $value = invoke-expression $expr
-    sure-write-debug "Member EXPR [$expr] -> $value [$($value.GetType())]"
+    sean-write-debug "Member EXPR [$expr] -> $value [$($value.GetType())]"
     $names += @(get-member -input $value -name "$var*" | 
                    % { "$expr$sep" + $_.name })
-    #sure-write-debug "EXPR: names -> [$names]"
-    #sure-write-debug "membs[$($names.count)]: ¦$($names -join '¦')¦"
+    #sean-write-debug "EXPR: names -> [$names]"
+    #sean-write-debug "membs[$($names.count)]: ¦$($names -join '¦')¦"
   }
 }
 
-#sure-write-debug "names[$($names.count)]: ¦$($names[0..10] -join '¦')¦"
+#sean-write-debug "names[$($names.count)]: ¦$($names[0..10] -join '¦')¦"
 # awf-new @{names=$names; linestart=$restofline}
 @($restofline) + @($names)
 
-sure-write-debug ("time = " + (toc))
+sean-write-debug ("time = " + (toc))

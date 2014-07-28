@@ -3,7 +3,7 @@
 Open a page to report a bug
 
 .DESCRIPTION
-sure-report-bug [-title] "Bug title" [[-repro] "Repro steps"] [[-description] "Description"]
+sean-report-bug [-title] "Bug title" [[-repro] "Repro steps"] [[-description] "Description"]
 
 .PARAMETER title
 This is required.  
@@ -30,11 +30,11 @@ $title = $title -replace ';','%3B'
 $description = $description -replace ';','%3B'
 $repro = $repro -replace ';','%3B'
 
-tfpt workitem /collection:http://vstfcodebox:8080/tfs/upsilon /new SureShell\Bug `
+tfpt workitem /collection:http://vstfcodebox:8080/tfs/upsilon /new SeanShell\Bug `
  /fields:"Title=$title;Description=$description"
 
 ## old code:
-#$base = 'http://co1vmvstfat45:8090/wi.aspx?pname=SureShell&wit=Bug';
+#$base = 'http://co1vmvstfat45:8090/wi.aspx?pname=SeanShell&wit=Bug';
 #$url = $base;
 
 #$url += '&[System.Title]=' + $title

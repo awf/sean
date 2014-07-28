@@ -3,16 +3,16 @@
 Insert xaml as an output block
 
 .DESCRIPTION
-$button = sure-insert-xaml '<Button>B</Button>'
+$button = sean-insert-xaml '<Button>B</Button>'
 $button.Child.AddHandler([System.Windows.Controls.Button]::ClickEvent, [System.Windows.RoutedEventhandler]{ 1 })
 
 
 #>
 param([string]$xaml, [object]$DataContext = $null)
 
-$wpfhost = $Host.PrivateData.UI -as [Sure.MyPSHostUserInterface]
+$wpfhost = $Host.PrivateData.UI -as [Sean.MyPSHostUserInterface]
 if (!$wpfhost) {
-  throw "Not a Sure shell"
+  throw "Not a Sean shell"
 }
 
 # wrap with border mainly to get the namespaces in place
@@ -24,4 +24,4 @@ $xaml
 </Border>
 "@;
 
-$wpfhost.SureInsertXaml($wrapxaml, $DataContext);
+$wpfhost.SeanInsertXaml($wrapxaml, $DataContext);

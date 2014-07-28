@@ -1,5 +1,5 @@
 ﻿
-Sure is a WPF-based powershell host.   Its main property is a clean and simple UI.
+Sean is a WPF-based powershell host.   Its main property is a clean and simple UI.
 Other features:
 
  * History search (like tcsh and matlab)

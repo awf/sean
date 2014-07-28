@@ -23,7 +23,7 @@ using System.Management.Automation;
         public abstract void SetShouldExit(int exitCode);
 */
 
-namespace Sure
+namespace Sean
 {
     /// <summary>
     /// This is an implementation of the PSHost abstract class. 
@@ -95,7 +95,7 @@ namespace Sure
         /// </summary>
         public override string Name
         {
-            get { return "SureHost"; }
+            get { return "SeanHost"; }
         }
 
         /// <summary>

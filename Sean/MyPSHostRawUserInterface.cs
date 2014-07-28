@@ -49,7 +49,7 @@ using PshRectangle = System.Management.Automation.Host.Rectangle;
    void                 SetBufferContents(Rectangle rectangle, BufferCell fill);
 */
 
-namespace Sure
+namespace Sean
 {
     /// <summary>
     /// A sample implementation of the PSHostRawUserInterface for console
@@ -66,7 +66,7 @@ namespace Sure
             this.mainwin = mainwin;
             ForegroundColor = ConsoleColor.Green;
             BackgroundColor = ConsoleColor.Black;
-            WindowTitle = "Sure";
+            WindowTitle = "Sean";
         }
 
         #region Colours

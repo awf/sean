@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Management.Automation;
 
-namespace PowerSure
+namespace PowerSean
 {
     /// <summary>
     /// Standard PS token types plus a "Group"

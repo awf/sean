@@ -9,7 +9,7 @@ using System.Management.Automation;
 using System.Management.Automation.Runspaces;
 using System.Collections.ObjectModel;
 
-namespace Sure
+namespace Sean
 {
     class PSDispatcher : DispatcherObject
     {
