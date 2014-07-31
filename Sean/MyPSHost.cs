@@ -176,6 +176,11 @@ namespace Sean
             ps.ExitCode = exitCode;
         }
 
+        public void Clear()
+          {
+            this.ps.Clear();
+          }
+
         public override PSObject PrivateData
         {
             get

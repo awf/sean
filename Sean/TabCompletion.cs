@@ -256,7 +256,7 @@ namespace Sean
         /// If true, names too long to fit in the tab-completion block
         /// are right justified, so the tails can be seen.
         /// </summary>
-        private static bool RIGHT_JUSTIFY_LONG_NAMES = false;
+        private static bool RIGHT_JUSTIFY_LONG_NAMES = true;
         private bool fix_justifications = false;
 
         // Called only if RIGHT_JUSTIFY_LONG_NAMES 

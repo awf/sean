@@ -239,23 +239,53 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Content Include="Scripts\sure-parse-print.ps1" />
-    <Content Include="Scripts\sure-report-bug.ps1" />
-    <Content Include="Scripts\sure-test-completions.ps1" />
     <Content Include="Documents\Bugs.txt" />
-    <Content Include="Scripts\sure-get-completions-2.ps1" />
-    <Content Include="Scripts\sure-get-completions-3.ps1" />
-    <None Include="Scripts\sure-test.ps1" />
+    <Content Include="Scripts\sean-clone.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-datagrid.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-dir-to-strings.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-get-completions-2.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-get-completions-3.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-get-completions.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-insert-xaml.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-out-default.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-parse-print.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-parse-to-expr.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-report-bug.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-test-completions.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-test.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean-write-debug.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\sean.ps1">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <SplashScreen Include="Documents\Splash.png" />
-    <Content Include="Scripts\sure-get-completions.ps1" />
-    <Content Include="Scripts\sure-insert-xaml.ps1" />
-    <Content Include="Scripts\sure-parse-to-expr.ps1" />
-    <Content Include="Scripts\sure.ps1" />
-    <Content Include="Scripts\sure-dir-to-strings.ps1" />
-    <Content Include="Scripts\sure-write-debug.ps1" />
-    <Content Include="Scripts\sure-clone.ps1" />
-    <Content Include="Scripts\sure-datagrid.ps1" />
-    <Content Include="Scripts\sure-out-default.ps1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\Sure.txt" />

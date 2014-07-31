@@ -142,7 +142,7 @@ namespace Sean
                     PSCommand[] profileCommands = PSUtils.GetProfileCommands("Sean", false);
                     foreach (PSCommand command in profileCommands)
                     {
-                        MainWindow.StaticDebugWrite("Profile command: " + PSUtils.Print(command) + "\n");
+                        //MainWindow.StaticDebugWrite("Profile command: " + PSUtils.Print(command) + "\n");
                         CurrentPowerShell.Commands = command;
                         try
                         {
@@ -183,14 +183,16 @@ namespace Sean
                     {
                         string sean_scripts_dir = Path.Combine(dir, "Sean", "Scripts");
 
-                        MainWindow.StaticDebugWrite("Found sean project [" + seanproj + "], Adding [" + sean_scripts_dir + "] to path\n");
+                        if (false)
+                        {
+                          MainWindow.StaticDebugWrite("Found sean project [" + seanproj + "], Adding [" + sean_scripts_dir + "] to path\n");
 
-                        CurrentPowerShell.Commands.Clear();
-                        CurrentPowerShell.Commands.AddScript(
-                            "$Env:PATH = '" + sean_scripts_dir + ";' + $Env:PATH;" +
-                            "write-host 'AppBase=[" + exe_dir + "]'");
-                        CurrentPowerShell.Invoke();
-
+                          CurrentPowerShell.Commands.Clear();
+                          CurrentPowerShell.Commands.AddScript(
+                              "$Env:PATH = '" + sean_scripts_dir + ";' + $Env:PATH;" +
+                              "write-host 'AppBase=[" + exe_dir + "]'");
+                          CurrentPowerShell.Invoke();
+                        }
                         break;
                     }
 
@@ -428,6 +430,11 @@ namespace Sean
             Collection<PSObject> psos = Execute((PSCommand cmds) => cmds.AddScript("get-history -count 10000"));
             return psos.ToArray();
         }
+
+      public void Clear()
+        {
+          MainWindow.StaticShriek("Not done");
+      }
     }
 
     public class PSUtils
