@@ -233,6 +233,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <Resource Include="..\README - Building.txt">
+      <Link>Documents\README - Building.txt</Link>
+    </Resource>
     <Content Include="Documents\SureShell.docx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
