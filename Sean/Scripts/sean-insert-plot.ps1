@@ -32,13 +32,21 @@ Process {
 
 End {
 	# Build the API URL to get the plot
-	$theproperties = $table[0].psobject.properties | Foreach { $_.Name }
-	$thelabels=$()
-	if ($theproperties.Length -le 1) {
-		$thevalues = $table | ForEach { $_.($theproperties[0]) }
+	$props = @($table[0].psobject.properties)
+	if ($props.Length -eq 0) {
+		# we were passed an array instead of an object with properties. So we'll just draw that.
+		$thevalues = $table
+		$thelabels = $()
 	} else {
-		$thelabels = $table | ForEach { $_.($theproperties[0]) }
-		$thevalues = $table | ForEach { $_.($theproperties[1]) }
+		# we have an object with properties. Let's pick two and draw those.
+		$theproperties = $props | Foreach { $_.Name }
+		$thelabels=$()
+		if ($theproperties.Length -le 1) {
+			$thevalues = $table | ForEach { $_.($theproperties[0]) }
+		} else {
+			$thelabels = $table | ForEach { $_.($theproperties[0]) }
+			$thevalues = $table | ForEach { $_.($theproperties[1]) }
+		}
 	}
 
 	$prettyval = $thevalues -join ','
