@@ -3,49 +3,68 @@
 Insert a plot of the data. Expects an array of PSObjects with two properties.
 
 .DESCRIPTION
-$big5 = dir | Sort-Object Length -descending | select -first 5 | select Name, Length 
+$big5 = dir | Sort-Object Length -descending | select -first 3 | select Name, Length 
 $foo = sean-insert-plot.ps1 $big5
-
+or:
 $foo = $big5 | sean-insert-plot.ps1 
-
+(either works)
 
 #>
-param($table, [object]$DataContext = $null)
+param($table = $null
+      , [object]$DataContext = $null
+	  , [Parameter(ValueFromPipeline=$True)] $tablePipeline = $null)
 
-$wpfhost = $Host.PrivateData.UI -as [Sean.MyPSHostUserInterface]
-if (!$wpfhost) {
-  throw "Not a Sean shell"
+# we're using the "advanced" form as a way to get to the data either from the pipeline, or from a variable.
+
+Begin {
+	$wpfhost = $Host.PrivateData.UI -as [Sean.MyPSHostUserInterface]
+	if (!$wpfhost) {
+	  throw "Not a Sean shell"
+	}
+	if ($null -eq $table) { $table = @() }
 }
 
-# Build the API URL to get the plot
-$theproperties = $table[0].psobject.properties | Foreach { $_.Name }
-$thelabels=$()
-if ($theproperties.Length -le 1) {
-	$thevalues = $table | ForEach { $_.($theproperties[0]) }
-} else {
-    $thelabels = $table | ForEach { $_.($theproperties[0]) }
-	$thevalues = $table | ForEach { $_.($theproperties[1]) }
+Process { 
+	if ($tablePipeline -ne $null) {
+		$table += $tablePipeline
+	}
 }
 
-$prettyval = $thevalues -join ','
-$prettylabels = $thelabels -join '|'
+End {
+	# Build the API URL to get the plot
+	$theproperties = $table[0].psobject.properties | Foreach { $_.Name }
+	$thelabels=$()
+	if ($theproperties.Length -le 1) {
+		$thevalues = $table | ForEach { $_.($theproperties[0]) }
+	} else {
+		$thelabels = $table | ForEach { $_.($theproperties[0]) }
+		$thevalues = $table | ForEach { $_.($theproperties[1]) }
+	}
 
-$ploturl="https://chart.googleapis.com/chart?chs=500x100&chd=t:${prettyval}&cht=p"
-if ($thelabels.Length -gt 0) {
-  $ploturl += "&chl=${prettylabels}"
-}
+	$prettyval = $thevalues -join ','
+	$prettylabels = $thelabels -join '|'
 
-# XAML doesn't seem to like the "=" character in URLs (?)
-$ploturl = $ploturl -replace '&','&amp;'
+	$ploturl="https://chart.googleapis.com/chart?chs=500x100&chd=t:${prettyval}&cht=p"
+	if ($thelabels.Length -gt 0) {
+	  $ploturl += "&chl=${prettylabels}"
+	}
 
-# wrap with border mainly to get the namespaces in place
-$wrapxaml = @"
+	# XAML doesn't seem to like the "=" character in URLs (?)
+	$ploturl = $ploturl -replace '&','&amp;'
+
+	sean-write-debug.ps1 "plot URL is $ploturl"
+
+	# wrap with border mainly to get the namespaces in place
+	$wrapxaml = @"
 <Border 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-$xaml
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 <Image Stretch="None" Source="$ploturl"/>
 </Border>
 "@;
 
-$wpfhost.SeanInsertXaml($wrapxaml, $DataContext);
+
+	#  <Image Stretch="None" Source="$ploturl"/>
+
+	$wpfhost.SeanInsertXaml($wrapxaml, $DataContext);
+}
