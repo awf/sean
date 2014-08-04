@@ -1,5 +1,5 @@
 
-This project depends on http://codebox/awfutils , and assumes one's directory structure looks like
+This project depends on http://awful.codeplex.com, and assumes one's directory structure looks like
 
- codebox/AWFUtils/AuDotNet
- Sean/sean/Sean.sln
+ codeplex/awful/AuDotNet
+ something/sean/Sean.sln

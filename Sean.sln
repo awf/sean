@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Releases", "Releases", "{E4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{0BF62680-BC14-4821-A0E8-8A42FB3D78AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuDotNet", "..\..\codebox\awfutils\AuDotNet\AuDotNet.csproj", "{7D75BF00-DF81-4311-9FC9-48223D1B54BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuDotNet", "..\..\codeplex\awful\AuDotNet\AuDotNet.csproj", "{7D75BF00-DF81-4311-9FC9-48223D1B54BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,8 +67,8 @@ Global
 		{39340C55-4556-4B30-95FC-13A67FB3E3ED}.SingleImage|x86.Build.0 = Release|x86
 		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|x64.ActiveCfg = Debug|x64
 		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|x64.Build.0 = Debug|x64
 		{7D75BF00-DF81-4311-9FC9-48223D1B54BF}.Debug|x86.ActiveCfg = Debug|x86

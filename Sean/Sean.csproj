@@ -335,12 +335,6 @@
     <Content Include="Documents\TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\codebox\awfutils\AuDotNet\AuDotNet.csproj">
-      <Project>{7d75bf00-df81-4311-9fc9-48223d1b54bf}</Project>
-      <Name>AuDotNet</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
@@ -356,6 +350,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\codeplex\awful\AuDotNet\AuDotNet.csproj">
+      <Project>{7d75bf00-df81-4311-9fc9-48223d1b54bf}</Project>
+      <Name>AuDotNet</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
