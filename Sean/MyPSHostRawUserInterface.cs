@@ -66,7 +66,7 @@ namespace Sean
             this.mainwin = mainwin;
             ForegroundColor = ConsoleColor.Green;
             BackgroundColor = ConsoleColor.Black;
-            WindowTitle = "Sean";
+            WindowTitle = "Sean the Shell";
         }
 
         #region Colours
