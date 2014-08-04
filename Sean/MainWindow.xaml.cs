@@ -103,8 +103,14 @@ namespace Sean
 
         public void SetPromptBusy()
         {
-            prompt.Text = "[busy]>";
-            tabCompletion.Clear(); 
+          prompt.Text = "[busy]>";
+          tabCompletion.Clear();
+        }
+
+        public void SetPromptCtrlC()
+        {
+          prompt.Text = "[busy.  Ctrl-C again to kill innermost subprocess.]>";
+          tabCompletion.Clear();
         }
 
         /// <summary>
@@ -219,10 +225,13 @@ namespace Sean
         [SeanCommandBinding("CLI_CtrlC", "CTRL+C", ControlBinding.inputbox)]
         public void CtrlC()
         {
-            if (inputbox.SelectionLength == 0)
-                psthread.CtrlC();
-            else
-                inputbox.Copy();
+          if (inputbox.SelectionLength == 0)
+          {
+            psthread.CtrlC();
+            SetPromptCtrlC();
+          }
+          else
+            inputbox.Copy();
         }
 
         bool discarding = false;
