@@ -1,0 +1,39 @@
+Hi I'm Andrew.
+I love PowerShell
+But I miss Bash
+So I wrote Sean the Shell.
+
+It's a PowerShell host written in WPF,
+so it gives you nice things like 
+scalable fonts, copy, paste
+
+It also gives you a more unix-like tab-completion which 
+means you don't need to select from a list, 
+you just keep typing until you get where you need to go.   
+
+Looking up history is easier too.  
+
+Just type the first few characters of the previous command 
+and hit up-arrow.   
+If you use PowerShell as I do, continually reworking the 
+same set of commands, this really helps your productivity
+
+Did I mention it's in WPF and Xaml?   That means you 
+can put WPF objects straight into the output stream.   
+
+Let's insert a datagrid...
+
+$dg = sean-datagrid name,lastwritetime,length,PSIsContainer (dir)
+ 
+And let's see a progressbar
+
+0..10 | % { Write-Progress task subtask -percent ($_ * 10); sleep 1}
+
+It can be handy when writing scripts to have a seperate stream for debug output.  
+Let's open one.  Now sean-write-debug can put stuff here without corrupting your
+main output.
+
+Sean is available on VisualStudio.com -- just email awf if 
+you want to know more.
+
+

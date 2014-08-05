@@ -1,0 +1,179 @@
+﻿<Window x:Class="Sean.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Sean.Properties="clr-namespace:Sean.Properties"
+        Title="Sean the Shell"
+        
+        Width="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Width, Mode=TwoWay}" 
+        Height="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Height, Mode=TwoWay}" 
+        Background="Gray" SizeToContent="Manual"
+        Name="mainwin" Loaded="mainwin_Loaded" Closed="mainwin_Closed">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="inputbox_fg" Color="White" />
+        <SolidColorBrush x:Key="inputbox_bg" Color="#ff303030" />
+        <SolidColorBrush x:Key="visualbell_bg" Color="Red" />
+        <SolidColorBrush x:Key="console_fg" Color="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Foreground, Mode=TwoWay}" />
+        <SolidColorBrush x:Key="console_bg" Color="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=Background, Mode=TwoWay}" />
+
+        <!-- Storyboard for visualbell animation -->
+        <Storyboard x:Key="visualbell_storyboard" x:Name="visualbell_storyboard" Duration="0:0:0.3" TargetName="input">
+            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" 
+                            To="{Binding Source={StaticResource visualbell_bg}, Path=Color}" 
+                            Duration="0:0:0.1"/>
+            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" 
+                            To="{Binding Source={StaticResource inputbox_bg}, Path=Color}" 
+                            BeginTime="0:0:0.1" Duration="0:0:0.2"/>
+        </Storyboard>
+
+        <!-- Set initial inputbox color -->
+        <!-- Need to do it this way instead of binding it below in order not to create a binding loop -->
+        <Style x:Key="inputbox_style" TargetType="Paragraph">
+            <Setter Property="Background" Value="{StaticResource inputbox_bg}"/>
+        </Style>
+
+
+    </Window.Resources>
+
+    <Grid x:Name="grid" PreviewKeyDown="Grid_PreviewKeyDown" TextInput="Grid_TextInput">
+        <Grid.RowDefinitions>
+            <!-- Debug window -->
+            <!-- <RowDefinition Height="{couldn't make this work: Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/> -->
+            <RowDefinition Height="{Binding Source={x:Static Sean.Properties:Settings.Default}, Path=DebugPaneHeight, Mode=TwoWay}"/>
+            <!-- Splitter -->
+            <RowDefinition Height="Auto"/>
+            <!-- Main console window -->
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <FlowDocumentScrollViewer Grid.Row="0" VerticalAlignment="Stretch" 
+                                      Padding="0" BorderBrush="Red" 
+                                      IsTabStop="False" Focusable="False">
+                <FlowDocument FontFamily="Consolas" FontSize="10" Background="#e0ffe0" TextAlignment="Left" ColumnGap="0" PagePadding="4,2,2,2" PageWidth="Auto" Name="debug" Focusable="False">
+                    <Paragraph Margin="0" BreakPageBefore="False">
+                        <Bold>Sean the Shell</Bold>
+            <LineBreak/>
+            Use
+                        <Bold>sean-write-debug</Bold> to write in this debug area.
+                        <LineBreak/>
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </Grid>
+        <GridSplitter Grid.Row="1" 
+              Grid.ColumnSpan="3" 
+              HorizontalAlignment="Stretch" 
+              VerticalAlignment="Center"
+              Background="PaleGreen" 
+              ShowsPreview="true"
+              ResizeDirection="Rows"
+              Height="5"/>
+
+        <!-- Progressbar and Scroller around main console window -->
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- Scroller around main console window -->
+            <FlowDocumentScrollViewer Grid.Row="0" x:Name="scroller" 
+                                  Background="{StaticResource console_bg}" Foreground="{StaticResource console_fg}" 
+                                  HorizontalScrollBarVisibility="Auto" >
+                <FlowDocument Name="consoledoc"
+                          FontFamily="Consolas" FontSize="10" TextAlignment="Left" 
+                          Background="{Binding ElementName=scroller, Path=Background}" Foreground="{StaticResource console_fg}" ColumnGap="0" PagePadding="4,2,2,2" Focusable="False">
+                    <Paragraph Name="designtimedata" Margin="0" BreakPageBefore="False">
+                        Design time output sample —— deleted when App loads
+                    </Paragraph>
+
+                    <!-- Input area: prompt and inputbox -->
+                    <Paragraph Name="input" Margin="0" Style="{StaticResource inputbox_style}" >
+                        <InlineUIContainer BaselineAlignment="Bottom">
+                            <Grid Width="{Binding ElementName=scroller, Path=ActualWidth}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <!-- ScrollBar Width hack -->
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <!-- removable awfixme -->
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Name="prompt" Grid.Column="0" Text="PS>" 
+                                       Foreground="White"
+                                        Background="{Binding ElementName=input, Path=Background}" 
+                                       />
+                                <TextBox Name="inputbox" Grid.Column="1" 
+                                 BorderThickness="1"
+                                 Foreground="{StaticResource inputbox_fg}"
+                                 Background="{Binding ElementName=input, Path=Background}" 
+                                 AcceptsTab="True" AcceptsReturn="True" 
+                                 MaxLength="1320"                  
+                                 TextWrapping="Wrap" GotFocus="inputbox_GotFocus">
+                                </TextBox>
+                            </Grid>
+                        </InlineUIContainer>
+                    </Paragraph>
+
+                    <!-- Block in which to display tab-completion candidates -->
+                    <BlockUIContainer Margin="0">
+                        <StackPanel Name="completions_scroller">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="completions_prefix" Grid.Column="0" Text="C:\" Foreground="White" HorizontalAlignment="Left" />
+                                <TextBlock x:Name="completions_next" Grid.Column="1" Text="[TAB] for more" Foreground="White"/>
+                            </Grid>
+                            <Grid Name="completions" Background="#111">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="192*" />
+                                    <ColumnDefinition Width="192*" />
+                                    <ColumnDefinition Width="192*" />
+                                    <ColumnDefinition Width="192*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Row="0" Grid.Column="0" TextTrimming="CharacterEllipsis" Text="Design-time completion sample" Margin="0,0,0,11.42" Grid.RowSpan="2"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" TextTrimming="CharacterEllipsis" Text="Design-time completion sample with very long name" Grid.ColumnSpan="2" Margin="0,0,0,11.42" Grid.RowSpan="2"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" TextTrimming="CharacterEllipsis" Text="Another completion sample" Margin="0,0.29,0,-0.58" Grid.RowSpan="8" />
+                            </Grid>
+                        </StackPanel>
+
+                    </BlockUIContainer>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+            <!-- Progress bar.   Starts hidden, and is displayed only when progress is on -->
+            <Grid Grid.Row="1" x:Name="progressbox" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar x:Name="progress" Grid.Column="0" Height="12" Value="20"/>
+                <TextBlock  x:Name="progresstext" Grid.Column="0" Text="Progress:" Margin="2,0,5,1"></TextBlock>
+            </Grid>
+
+        </Grid>
+    </Grid>
+
+</Window>

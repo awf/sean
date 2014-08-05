@@ -1,0 +1,3 @@
+﻿
+1. Cannot provide input to subprocesses which expect console input...
+   This is the bug at   
